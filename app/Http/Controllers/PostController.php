@@ -22,6 +22,7 @@ class PostController extends Controller
             'title'=>'required|min:2|max:50',
             'description'=>'required|min:2|max:1000'
         ]);
+
         $strpos = strpos($request->photo,';');
         $sub = substr($request->photo,0,$strpos);
         $ex = explode('/',$sub)[1];
@@ -29,6 +30,7 @@ class PostController extends Controller
         $img = Image::make($request->photo)->resize(200, 200);
         $upload_path = public_path()."/uploadimage/";
         $img->save($upload_path.$name);
+
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
